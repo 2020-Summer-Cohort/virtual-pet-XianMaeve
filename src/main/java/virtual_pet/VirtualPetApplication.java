@@ -11,7 +11,7 @@ public class VirtualPetApplication {
 
         System.out.println("What would you like to name your pet?");
         myPet.petName = input.next();
-        System.out.println("You've named your pet" + myPet.petName);
+        System.out.println("You've named your pet " + myPet.petName);
 
         System.out.println("Now that you've adopted " + myPet.petName + ", you have a lot of responsibility in taking care of them! \n" +
                 "Be careful to be attentive to their needs, else they may run away or even die.");
@@ -20,6 +20,7 @@ public class VirtualPetApplication {
         System.out.println("When you're ready, just type \"go\" ");
 
         boolean notReady = true;
+        boolean isDead = false;
 
         while (notReady) {
             String ready = input.next().toLowerCase();
@@ -30,7 +31,7 @@ public class VirtualPetApplication {
 
         }
 
-        System.out.println(myPet.petName + "seems to be settling in nicely. \n \n");
+        System.out.println(myPet.petName + " seems to be settling in nicely. \n \n");
         System.out.println("（ΦωΦ）\n");
         System.out.println("What would you like to do with " + myPet.petName + "?");
 
@@ -46,30 +47,35 @@ public class VirtualPetApplication {
 
         String currentAction = input.next().toLowerCase();
 
-        while (currentAction != "quit") {
+        while (!currentAction.equals("quit")) {
 
             switch (currentAction) {
                 case "1":
                     myPet.feed();
+                    currentAction = "";
                     break;
                 case "2":
                     myPet.water();
+                    currentAction = "";
                     break;
                 case "3":
                     myPet.letOut();
+                    currentAction = "";
                     break;
                 case "4":
                     myPet.giveToy();
+                    currentAction = "";
                     break;
                 case "5":
                     myPet.play();
+                    currentAction = "";
                     break;
                 case "6":
                     myPet.vetVisit();
+                    currentAction = "";
                     break;
                 case "7":
-                    break;
-                case "quit":
+                    currentAction = "";
                     break;
                 default:
                     System.out.println("Your pet wonders what you're trying to do, but doesn't seem to react in any way. \n" +
@@ -87,6 +93,7 @@ public class VirtualPetApplication {
                 System.out.println("(=xÅx=) \n" +
                         myPet.petName + " has died of thirst!  Try to be more attentive to your next pets needs. \n" +
                         "Thanks for playing.  Murderer.");
+                isDead = true;
                 currentAction = "quit";
             } else if (myPet.petHunger <= 50 && myPet.petHunger >= 26) {
                 System.out.println("(ФДФ)");
@@ -96,14 +103,18 @@ public class VirtualPetApplication {
                 System.out.println("(xДx)✧ \n" +
                         myPet.petName + " has died of hunger!  Try to be more attentive to your next pets needs. \n" +
                         "Thanks for playing.  Murderer.");
+                isDead = true;
+                currentAction = "quit";
             } else if (myPet.petHealth <= 50 && myPet.petHealth >= 26) {
                 System.out.println("(Ф∀Ф)=3");
-            } else if (myPet.petHealth <= 25  && myPet.petHealth !=0) {
+            } else if (myPet.petHealth <= 25 && myPet.petHealth != 0) {
                 System.out.println("(ↀ∀ↀ)=3");
             } else if (myPet.petHealth <= 0) {
                 System.out.println("(x∀x)=3 \n" +
                         myPet.petName + " has died from a mysterious illness.  If only you had taken them to the vet in time... \n" +
                         "Thanks for playing.  Murderer.");
+                isDead = true;
+                currentAction = "quit";
             } else if (myPet.petPotty <= 50 && myPet.petPotty >= 26) {
                 System.out.println("(Φ∀Φ)=3");
             } else if (myPet.petPotty <= 25 && myPet.petPotty != 0) {
@@ -124,9 +135,11 @@ public class VirtualPetApplication {
                         "... wait, where's " + myPet.petName + "? \n" +
                         "Oh no, it looks like they ran away!  You should pay more attention to them in the future. \n" +
                         "Thanks for playing.  Hopefully, " + myPet.petName + " is okay out in the cold, dark world on their own.");
+                isDead = true; //they're not really dead I just need this to be true for the exit
+                currentAction = "quit";
             } else if (myPet.petBoredom <= 50 && myPet.petBoredom >= 26) {
                 System.out.println("ლ(=ↀωↀ=)ლ");
-            } else if (myPet.petBoredom <= 25 && myPet.petBoredom !=0) {
+            } else if (myPet.petBoredom <= 25 && myPet.petBoredom != 0) {
                 System.out.println("ლ(=ↀ皿ↀ=)ლ");
             } else if (myPet.petBoredom == 0) {
                 System.out.println("||| ლ(=ↀ皿ↀ=)ლ \n" +
@@ -136,16 +149,22 @@ public class VirtualPetApplication {
                 myPet.petHealth -= 20;
             } else {
                 System.out.println("（ΦωΦ）");
-                myPet.tick();
             }
-
-            currentAction = input.next().toLowerCase();
 
             myPet.tick();
 
+            currentAction = input.next().toLowerCase();
+
+        }
+
+        if (isDead) {
+            System.out.println("");
+        } else {
+            System.out.println(myPet.petName + " is on their way to their new home.  Thanks for playing.");
         }
 
 
     }
 
 }
+

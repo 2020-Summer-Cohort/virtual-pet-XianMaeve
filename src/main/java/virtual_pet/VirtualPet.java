@@ -27,7 +27,7 @@ public class VirtualPet {
         petThirst -= 1;
         petPotty -= .5;
         if (hasToy) {
-            petBoredom = petBoredom; //pet does not get bored when it has a toy to play with
+            //pet does not get bored when it has a toy
             if (seed >= 40) {
                 hasToy = false;
                 System.out.println("Oh no!  " + petName + "'s toy broke!");
@@ -51,6 +51,11 @@ public class VirtualPet {
 
         System.out.println(lastAction);
 
+        if (seed <= 10) {
+            petThirst += 20;
+            System.out.println(petName + " also laps up some water while they're by the bowl.");
+        }
+
         return petHunger;
     }
 
@@ -72,10 +77,27 @@ public class VirtualPet {
         petHunger -= 20;
         petThirst -= 20;
 
-        petBoredom = (petBoredom / 2);
+        petBoredom += 20;
 
-        lastAction = "You let " + petName + "out back for a few minutes. \n" +
+        lastAction = "You let " + petName + " out back for a few minutes. \n" +
                 "They come in looking relieved.";
+
+        System.out.println(lastAction);
+
+        if (seed <= 10) {
+            petSocial += 20;
+            System.out.println("It looks like they played with some local animals while they were out.");
+        } else if (seed <= 20 && seed >= 11) {
+            System.out.println("It looks like " + petName + " found some tasty local treats to munch on while they were out.");
+            petHunger += 20;
+        } else if (seed <= 30 && seed >= 21) {
+            System.out.println(petName + " is very wet.  They probably frolicked around in the water while they were out.");
+            petThirst += 20;
+        } else if (seed == 99) {
+            System.out.println("Oh no!  Looks like " + petName + " got into a bit of a scuffle while they were out.  \n" +
+                    "You should really get that looked at...");
+            petHealth -= 20;
+        }
 
         return petPotty;
     }
@@ -86,7 +108,10 @@ public class VirtualPet {
         hasToy = true;
 
         lastAction = "You gave " + petName + " a toy. \n" +
-                "They paw at it inquisitively.";
+                "They paw at it inquisitively. \n" +
+                "They shouldn't get bored while they have this toy.";
+
+        System.out.println(lastAction);
 
         return hasToy;
     }
@@ -94,20 +119,25 @@ public class VirtualPet {
     public Object play() {
         petSocial = 100;
 
-        petBoredom = (petBoredom / 2);
+        petBoredom += 20;
 
         lastAction = "You played a few rounds of tic-tac-toe with " + petName + "\n" +
                 "They seem grateful for the attention.";
+
+        System.out.println(lastAction);
 
         return petSocial;
     }
 
     public Object vetVisit() {
         petHealth = 100;
+        petSocial -= 20;
 
-        lastAction = "You take " + petName + "to see the vet. \n" +
+        lastAction = "You take " + petName + " to see the vet. \n" +
                 "They fight a bit, but come out looking better than ever. \n" +
                 "They might need your assurance that you still love them after you took them to see the scary vet...";
+
+        System.out.println(lastAction);
 
         return petHealth;
     }
