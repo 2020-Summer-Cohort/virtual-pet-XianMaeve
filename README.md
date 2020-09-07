@@ -1,4 +1,4 @@
-## Virtual Pet
+# Virtual Pet
 
 This is a simple tamagotchi like game.  
 
@@ -9,7 +9,7 @@ Be careful to be attentive to your pet - if you don't take care of its needs, ba
 
 
 
-# Notes on the code/goals for future iterations:
+## Notes on the code/goals for future iterations:
 
 I'd like to find a way to have the game tick endlessly regardless of whether the user inputs an action or not.  I tried to do some research and experimentation on how to do this but ultimately wound up running out of time.  
 
@@ -26,7 +26,7 @@ I also hope that I'm not the only GLaDOS fan...
 The pet is random weird cat emoji from the internet. 
 
 
-# Cheaters only past this point
+## Cheaters only past this point
 
 This is just kind of a cheat sheet for the cat faces.  
 
