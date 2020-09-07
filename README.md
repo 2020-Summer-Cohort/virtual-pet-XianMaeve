@@ -15,6 +15,8 @@ I'd like to find a way to have the game tick endlessly regardless of whether the
 
 I'd like to have the output be static -- only one face on screen at a time, and it changes rather than outputting a new face to the console.  The options are always below this, and the result of whatever you just did is always below that.  No new lines are added ever, but the current lines change based on input.  
 
+I could not test because of issues importing org.junit.assert.  Several of my classmates also had this issue.  Hopefully we can figure out what happened during the next q&a or code jam.
+
 The pet can take care of some of it's needs while it's outside.  
 
 I really hope that I'm not the only one who let the pet die or run away...
